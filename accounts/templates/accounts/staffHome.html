@@ -1,0 +1,87 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+<br>
+
+<div class="container">
+    <div class="row">
+      <div class="col-sm">
+        <div class="card text-center bg-danger text-white">
+            <div class="card-header">
+                Total Pending Deliveries
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{pending}}</p>
+            </div>
+        </div>
+      </div>
+      <div class="col-sm">
+        <div class="card text-center">
+            <div class="card-header">
+                Total Pending Deliveries
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{pending}}</p>
+            </div>
+        </div>
+      </div>
+      <div class="col-sm">
+        <div class="card text-center bg-info">
+            <div class="card-header">
+                Options
+            </div>
+            <div class="card-body">
+              <a href="{% url 'createDelivery' %}" class="btn btn-light btn-sm active" role="button" aria-pressed="true">Create Delivery</a>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<br>
+
+<table class="table table-sm table-bordered table-dark">
+    <thead>
+      <tr>
+        <th scope="col">Request ID</th>
+        <th scope="col">Item name</th>
+        <th scope="col">Item description</th>
+        <th scope="col">Pick up location</th>
+        <th scope="col">Item drop off location</th>
+        <th scope="col">Status</th>
+        <th scope="col">Created by</th>
+        <th scope="col">Handled by</th>
+
+      </tr>
+    </thead>
+    <tbody>
+        {% for i in delivery %}
+        <tr>
+            <th scope = "row">
+              {{ i.id }}
+              <a href="{% url 'updateDelivery' i.id %}" class = "btn btn-light btn-sm active" role="button" aria-pressed="true">edit</a>
+              <a href="{% url 'deleteDelivery' i.id %}" class = "btn btn-light btn-sm active" role="button" aria-pressed="true">delete</a>
+            </th>
+            <td>{{i.itemName}}</td>
+            <td>{{i.itemDescription}}</td>
+            <td>{{i.pickUpLocation}}</td>
+            <td>{{i.dropOffLocation}}</td>
+            <td>{{i.status}}</td>
+            <td>{{i.staff.name}}</td>
+            <td>
+              {{i.partTimer.name}}
+              {% if i.partTimer %}
+                <a href="{% url 'partTimeProfile' i.partTimer.id %}">view</a>
+              {% else %}
+                No partTimer available
+              {% endif %}
+            </td>
+
+        </tr>
+        {% endfor %}
+
+    </tbody>
+  </table>
+
+{% endblock %}
+

@@ -1,0 +1,36 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+
+<br>
+
+<table class="table table-sm table-bordered table-dark">
+    <thead>
+      <tr>
+        <th scope="col">Request ID</th>
+        <th scope="col">Item name</th>
+        <th scope="col">Item description</th>
+        <th scope="col">Pick up location</th>
+        <th scope="col">Item drop off location</th>
+        <th scope="col">Status</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <h1 class = "text-center">Available Delivery requests</h1>
+        {% for i in delivery %}
+        <tr>
+            <th scope = "row">{{ i.id }}</th>
+            <td>{{i.itemName}}</td>
+            <td>{{i.itemDescription}}</td>
+            <td>{{i.pickUpLocation}}</td>
+            <td>{{i.dropOffLocation}}</td>
+            <td>{{i.status}}</td>
+
+        </tr>
+        {% endfor %}
+
+    </tbody>
+  </table>
+
+{% endblock %}
