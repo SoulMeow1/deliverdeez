@@ -1,0 +1,17 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+
+<p>Are you sure you have completed "{{delivery}}"?</p>
+
+<form action = "{% url 'completeDelivery' delivery.id %}" method = "POST">
+
+    {% csrf_token %}
+    
+    <a href="{% url 'partTimeHome' %}">Cancel</a>
+
+    <input type = "submit" name = "Confirm" value = "Complete">
+</form>
+
+
+{% endblock %}
